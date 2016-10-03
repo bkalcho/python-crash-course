@@ -1,0 +1,5 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+     // Columns at which to show vertical rulers
+    "editor.rulers": [72, 80]
+}
