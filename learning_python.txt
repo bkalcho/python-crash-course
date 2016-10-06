@@ -1,0 +1,5 @@
+In Python you can read from files.
+In Python you can write to files.
+In Python you can define classes.
+In Python you can write scripts executed by the interpreter.
+In Python you can compile programs
