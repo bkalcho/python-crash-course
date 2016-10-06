@@ -1,1 +1,4 @@
 I love programming.
+I love creating new games.
+I also like fining mining in large datasets.
+I love creating apps that can run in a browser.
