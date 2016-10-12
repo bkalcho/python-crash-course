@@ -1,5 +1,8 @@
 // Place your settings in this file to overwrite default and user settings.
 {
      // Columns at which to show vertical rulers
-    "editor.rulers": [72, 80]
+    "editor.rulers": [72, 80, 120],
+
+    // Controls whether the editor should render indent guides
+    "editor.renderIndentGuides": true,
 }
