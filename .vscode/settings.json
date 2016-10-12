@@ -2,7 +2,10 @@
 {
      // Columns at which to show vertical rulers
     "editor.rulers": [72, 80, 120],
+<<<<<<< HEAD
 
+=======
+>>>>>>> 28af9518a4fa3b22e8ab5a6de5229a4883f5379c
     // Controls whether the editor should render indent guides
     "editor.renderIndentGuides": true,
 }
