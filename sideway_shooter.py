@@ -4,7 +4,7 @@
 
 import pygame
 from sideway_shooter_settings import Settings
-import sys
+import sideway_shooter_game_functions as gf
 from sideway_shooter_ship import Ship
 
 def run_game():
@@ -17,19 +17,12 @@ def run_game():
     screen = pygame.display.set_mode((ai_settings.width,
         ai_settings.height))
     pygame.display.set_caption("Sideway Shooter")
-    ship = Ship(screen)
+    ship = Ship(ai_settings, screen)
 
     # Game main loop.
     while True:
-        # Catch keyboard and mouse events.
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-        
-        screen.fill(ai_settings.bg_color)
-        # Draw ship on the screen
-        ship.blitme()
-        # Draw screen.
-        pygame.display.flip()
+        gf.check_events(ship)
+        ship.update()
+        gf.update_screen(ai_settings, screen, ship)
 
 run_game()

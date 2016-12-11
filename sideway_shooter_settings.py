@@ -9,3 +9,6 @@ class Settings(object):
         self.width = 800
         self.height = 600
         self.bg_color = (255, 255, 255)
+
+        # Ship's settings.
+        self.ship_speed_factor = 1.5
