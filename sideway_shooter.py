@@ -6,6 +6,7 @@ import pygame
 from sideway_shooter_settings import Settings
 import sideway_shooter_game_functions as gf
 from sideway_shooter_ship import Ship
+from pygame.sprite import Group
 
 def run_game():
     """Main Sideway shooter game program."""
@@ -18,11 +19,14 @@ def run_game():
         ai_settings.height))
     pygame.display.set_caption("Sideway Shooter")
     ship = Ship(ai_settings, screen)
+    # Make a group to store bullets in.
+    bullets = Group()
 
     # Game main loop.
     while True:
         gf.check_events(ship)
         ship.update()
+        gf.update_bullets(bullets)
         gf.update_screen(ai_settings, screen, ship)
 
 run_game()
