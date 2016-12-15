@@ -2,6 +2,7 @@
 # Date: 14-Dec-2016
 # 13-1. Stars: Find an image of a star. Make a grid of stars appear on
 # the screen.
+# 13-2. Make more realistic pattern by random placement of each star.
 
 import pygame
 from stars_settings import Settings
