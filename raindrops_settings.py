@@ -9,3 +9,6 @@ class Settings(object):
         self.screen_width = 800
         self.screen_height = 600
         self.bg_color = (255, 255, 255)
+
+        # Raindrop Settings
+        self.raindrop_speed_factor = 0.75

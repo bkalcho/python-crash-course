@@ -20,6 +20,10 @@ class Raindrop(Sprite):
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
 
+        # Save exact position of star
+        self.x = float(self.rect.x)
+        self.y = float(self.rect.y)
+
     def blitme(self):
         """Set raindrop on the screen."""
         self.screen.blit(self.image, self.rect)

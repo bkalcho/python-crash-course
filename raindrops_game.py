@@ -8,6 +8,8 @@ import pygame
 import sys
 from raindrop import Raindrop
 from raindrops_settings import Settings
+from pygame.sprite import Group
+import raindrops_game_functions as gf
 
 def run_game():
     pygame.init() # Initialize game
@@ -16,15 +18,12 @@ def run_game():
     screen = pygame.display.set_mode((ai_settings.screen_width,
         ai_settings.screen_height))
     pygame.display.set_caption("Raindrops Game")
-    raindrop = Raindrop(screen)
+    raindrops = Group()
+    gf.create_grid(ai_settings, screen, raindrops)
 
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-        
-        screen.fill(ai_settings.bg_color)
-        raindrop.blitme()
-        pygame.display.flip()
+        gf.check_events()
+        gf.raindrops_update(ai_settings, raindrops)
+        gf.update_screen(ai_settings, screen, raindrops)
 
 run_game()
