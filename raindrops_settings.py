@@ -12,3 +12,4 @@ class Settings(object):
 
         # Raindrop Settings
         self.raindrop_speed_factor = 0.75
+        self.new_grid = True

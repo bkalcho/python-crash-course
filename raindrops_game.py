@@ -19,10 +19,12 @@ def run_game():
         ai_settings.screen_height))
     pygame.display.set_caption("Raindrops Game")
     raindrops = Group()
-    gf.create_grid(ai_settings, screen, raindrops)
+
 
     while True:
         gf.check_events()
+        if new_grid:
+            gf.create_grid(ai_settings, screen, raindrops)
         gf.raindrops_update(ai_settings, raindrops)
         gf.update_screen(ai_settings, screen, raindrops)
 

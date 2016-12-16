@@ -39,6 +39,7 @@ def create_grid(ai_settings, screen, raindrops):
     number_raindrops_x = available_space_x // (2 * raindrop_width)
     for raindrop_number in range(number_raindrops_x):
         create_raindrop(ai_settings, screen, raindrops, raindrop_number)
+    ai_settings.new_grid = False
 
 def raindrops_update(ai_settings, raindrops):
     """Update position of all raindrops in the grid."""
@@ -48,3 +49,4 @@ def raindrops_update(ai_settings, raindrops):
         if raindrop.rect.y >= ai_settings.screen_height:
             for raindrop in raindrops.copy():
                 raindrops.remove(raindrop)
+            ai_settings.new_grid = True
