@@ -34,8 +34,9 @@ def check_keyup_events(event, catcher):
         catcher.moving_right = False
 
 
-def update_screen(ai_settings, screen, catcher):
+def update_screen(ai_settings, screen, catcher, ball):
     """Update Game screen."""
     screen.fill(ai_settings.bg_color)
     catcher.blitme()
+    ball.blitme()
     pygame.display.flip()

@@ -13,6 +13,7 @@ import sys
 from catch_settings import Settings
 import catch_game_functions as gf
 from catcher import Catcher
+from catcher_ball import Ball
 
 def run_game():
     """Main game program."""
@@ -23,12 +24,14 @@ def run_game():
     pygame.display.set_caption("Catch Game")
     # Catcher object.
     catcher = Catcher(screen)
+    # Ball object.
+    ball = Ball(screen)
 
     # Main game loop.
     while True:
         gf.catch_events(catcher)
         catcher.update(ai_settings, screen)
-        gf.update_screen(ai_settings, screen, catcher)
+        gf.update_screen(ai_settings, screen, catcher, ball)
 
 
 run_game()
