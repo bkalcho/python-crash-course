@@ -23,7 +23,7 @@ def run_game():
 
     while True:
         gf.check_events()
-        if new_grid:
+        if ai_settings.new_grid:
             gf.create_grid(ai_settings, screen, raindrops)
         gf.raindrops_update(ai_settings, raindrops)
         gf.update_screen(ai_settings, screen, raindrops)
