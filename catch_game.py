@@ -14,6 +14,7 @@ from catch_settings import Settings
 import catch_game_functions as gf
 from catcher import Catcher
 from catcher_ball import Ball
+from pygame.sprite import Group
 
 def run_game():
     """Main game program."""
@@ -23,14 +24,17 @@ def run_game():
         ai_settings.screen_height))
     pygame.display.set_caption("Catch Game")
     # Catcher object.
-    catcher = Catcher(screen)
+    catcher = Group()
     # Ball object.
-    ball = Ball(ai_settings, screen)
+    #ball = Ball(ai_settings, screen)
+    ball = Group()
 
     # Main game loop.
     while True:
-        gf.catch_events(catcher)
-        catcher.update(ai_settings, screen)
+        for c in catcher.sprites():
+            gf.catch_events(c)
+        gf.update_catcher(ai_settings, screen, catcher)
+        gf.update_ball(ai_settings, screen, catcher, ball)
         gf.update_screen(ai_settings, screen, catcher, ball)
 
 

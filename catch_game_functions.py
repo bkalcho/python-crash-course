@@ -4,6 +4,9 @@
 
 import pygame
 import sys
+from catcher import Catcher
+from catcher_ball import Ball
+from random import randint
 
 def catch_events(catcher):
     """Cactch keyboard presses and mouse events."""
@@ -37,16 +40,35 @@ def check_keyup_events(event, catcher):
 def update_screen(ai_settings, screen, catcher, ball):
     """Update Game screen."""
     screen.fill(ai_settings.bg_color)
-    catcher.blitme()
-    update_ball(screen, ball)
+    catcher.draw(screen)
+    ball.draw(screen)
     pygame.display.flip()
 
 
-def update_ball(screen, ball):
+def update_ball(ai_settings, screen, catcher, ball):
     """Update ball position and get rid of old ball."""
     screen_rect = screen.get_rect()
     ball.update()
-    ball.blitme()
-#    if ball.rect.top >= screen_rect.bottom:
-#        del ball
-#    print(ball)
+    for b in ball.copy():
+        if b.rect.top >= screen_rect.bottom:
+            ball.remove(b)
+    if len(ball) == 0:
+        new_b = Ball(ai_settings, screen)
+        new_b.x = randint(new_b.rect.width, screen_rect.right - new_b.rect.width)
+        new_b.rect.x = new_b.x
+        new_b.y = new_b.rect.height
+        new_b.rect.y = new_b.y
+        ball.add(new_b)
+    # Detecting collisions
+    collisions = pygame.sprite.groupcollide(ball, catcher, True, False)
+
+
+def update_catcher(ai_settings, screen, catcher):
+    screen_rect = screen.get_rect()
+    catcher.update(ai_settings, screen)
+    if len(catcher) == 0:
+        c = Catcher(screen)
+        c.center = screen_rect.centerx
+        c.rect.centerx = c.center
+        c.rect.bottom = screen_rect.bottom
+        catcher.add(c)

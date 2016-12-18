@@ -3,10 +3,12 @@
 # Ball object
 
 import pygame
+from pygame.sprite import Sprite
 
-class Ball(object):
+class Ball(Sprite):
     """Represent ball object."""
     def __init__(self, ai_settings, screen):
+        super(Ball, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
         # Load ball image and get its rect.
