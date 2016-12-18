@@ -6,8 +6,9 @@ import pygame
 
 class Ball(object):
     """Represent ball object."""
-    def __init__(self, screen):
+    def __init__(self, ai_settings, screen):
         self.screen = screen
+        self.ai_settings = ai_settings
         # Load ball image and get its rect.
         self.image = pygame.image.load("images/ball.bmp")
         self.rect = self.image.get_rect()
@@ -23,3 +24,8 @@ class Ball(object):
     def blitme(self):
         """Blit ball image in its rect on the screen."""
         self.screen.blit(self.image, self.rect)
+
+    def update(self):
+        """Update ball position."""
+        self.y += self.ai_settings.ball_speed_factor
+        self.rect.y = self.y

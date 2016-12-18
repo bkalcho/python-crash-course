@@ -12,3 +12,6 @@ class Settings(object):
 
         # Catcher settings.
         self.catcher_speed_factor = 1.5
+
+        # Ball settings.
+        self.ball_speed_factor = 0.10

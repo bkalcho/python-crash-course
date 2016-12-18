@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/.vscode" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\Users\debkal\AppData\Local\Programs\Python\Python35-32\python.exe)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5.2 (C:\Users\bojan.kalicanin\AppData\Local\Programs\Python\Python35-32\python.exe)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

@@ -25,7 +25,7 @@ def run_game():
     # Catcher object.
     catcher = Catcher(screen)
     # Ball object.
-    ball = Ball(screen)
+    ball = Ball(ai_settings, screen)
 
     # Main game loop.
     while True:
