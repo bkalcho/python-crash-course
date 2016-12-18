@@ -7,6 +7,7 @@ import sys
 from catcher import Catcher
 from catcher_ball import Ball
 from random import randint
+from time import sleep
 
 def catch_events(catcher):
     """Cactch keyboard presses and mouse events."""
@@ -45,20 +46,20 @@ def update_screen(ai_settings, screen, catcher, ball):
     pygame.display.flip()
 
 
-def update_ball(ai_settings, screen, catcher, ball):
+def update_ball(ai_settings, stats, screen, catcher, ball):
     """Update ball position and get rid of old ball."""
     screen_rect = screen.get_rect()
     ball.update()
-    for b in ball.copy():
-        if b.rect.top >= screen_rect.bottom:
-            ball.remove(b)
-    if len(ball) == 0:
+    check_ball_bottom(stats, screen_rect, ball)
+    if len(ball) == 0 and stats.balls_left > 0:
         new_b = Ball(ai_settings, screen)
         new_b.x = randint(new_b.rect.width, screen_rect.right - new_b.rect.width)
         new_b.rect.x = new_b.x
         new_b.y = new_b.rect.height
         new_b.rect.y = new_b.y
         ball.add(new_b)
+    elif stats.balls_left == 0:
+        stats.game_active = False
     # Detecting collisions
     collisions = pygame.sprite.groupcollide(ball, catcher, True, False)
 
@@ -72,3 +73,13 @@ def update_catcher(ai_settings, screen, catcher):
         c.rect.centerx = c.center
         c.rect.bottom = screen_rect.bottom
         catcher.add(c)
+
+def check_ball_bottom(stats, screen_rect, ball):
+    """Check if ball reaches bottom of the screen."""
+    for b in ball.copy():
+        if b.rect.top >= screen_rect.bottom:
+            ball.remove(b)
+            stats.balls_left -= 1
+            sleep(1.5)
+            
+

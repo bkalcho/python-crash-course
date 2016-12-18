@@ -15,3 +15,4 @@ class Settings(object):
 
         # Ball settings.
         self.ball_speed_factor = 0.10
+        self.ball_limit = 3
