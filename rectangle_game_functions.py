@@ -5,12 +5,31 @@
 import pygame
 import sys
 
-def check_events():
+def check_events(ship):
     """Check for keyboard presses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+        elif event.type == pygame.KEYDOWN:
+            check_kedown_events(event, ship)
+        elif event.type == pygame.KEYUP:
+            check_keyup_events(event, ship)
 
+
+def check_kedown_events(event, ship):
+    """Check for key presses."""
+    if event.key == pygame.K_UP:
+        ship.movement_up = True
+    if event.key == pygame.K_DOWN:
+        ship.movement_down = True
+
+
+def check_keyup_events(event, ship):
+    """Check for key releasses."""
+    if event.key == pygame.K_UP:
+        ship.movement_up = False
+    if event.key == pygame.K_DOWN:
+        ship.movement_down = False
 
 def check_rectangle_direction(screen_rect, rect):
     if rect.rect.top <= screen_rect.top:
@@ -26,7 +45,6 @@ def rectangle_update(screen, rect):
     screen_rect = screen.get_rect()
     check_rectangle_direction(screen_rect, rect)
     rect.update()
-    #print("UP", rect.moving_up, "DOWN", rect.moving_down)
 
 
 def update_screen(ai_settings, screen, rect, ship):

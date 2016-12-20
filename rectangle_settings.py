@@ -14,3 +14,10 @@ class Settings(object):
         self.rect_height = 55
         self.rect_color = (0, 0, 0)
         self.speed_factor = 0.5
+
+        # Ship settings.
+        self.ship_speed_factor = 1.5
+
+        # Bullet settings.
+        self.bullet_width = 30
+        self.bullet_height = 15
