@@ -13,3 +13,4 @@ class Settings(object):
         self.rect_width = 35
         self.rect_height = 55
         self.rect_color = (0, 0, 0)
+        self.speed_factor = 2

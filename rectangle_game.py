@@ -26,6 +26,7 @@ def run_game():
         # Main game loop.
 
         gf.check_events()
+        rectangle.update()
         gf.update_screen(ai_settings, screen, rect)
 
 
