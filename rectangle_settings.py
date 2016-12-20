@@ -21,3 +21,4 @@ class Settings(object):
         # Bullet settings.
         self.bullet_width = 30
         self.bullet_height = 15
+        self.bullet_color = (0, 0, 0)

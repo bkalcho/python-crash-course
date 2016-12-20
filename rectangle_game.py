@@ -13,6 +13,7 @@ from rectangle_settings import Settings
 import rectangle_game_functions as gf
 from rectangle import Rectangle
 from rectangle_ship import Ship
+from pygame.sprite import Group
 
 def run_game():
     """Main game program."""
@@ -23,14 +24,15 @@ def run_game():
     pygame.display.set_caption("Rectangle Game")
     rect = Rectangle(ai_settings, screen)
     ship = Ship(ai_settings, screen)
+    bullets = Group()
 
     while True:
         # Main game loop.
 
         gf.check_events(ship)
-        ship.update()
         gf.rectangle_update(screen, rect)
-        gf.update_screen(ai_settings, screen, rect, ship)
+        ship.update()
+        gf.update_screen(ai_settings, screen, rect, ship, bullets)
 
 
 run_game()
