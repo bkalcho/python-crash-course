@@ -12,6 +12,7 @@ import pygame
 from rectangle_settings import Settings
 import rectangle_game_functions as gf
 from rectangle import Rectangle
+from rectangle_ship import Ship
 
 def run_game():
     """Main game program."""
@@ -21,13 +22,14 @@ def run_game():
                     ai_settings.screen_height))
     pygame.display.set_caption("Rectangle Game")
     rect = Rectangle(ai_settings, screen)
+    ship = Ship(screen)
 
     while True:
         # Main game loop.
 
         gf.check_events()
         gf.rectangle_update(screen, rect)
-        gf.update_screen(ai_settings, screen, rect)
+        gf.update_screen(ai_settings, screen, rect, ship)
 
 
 run_game()

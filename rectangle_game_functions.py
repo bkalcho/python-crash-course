@@ -29,8 +29,9 @@ def rectangle_update(screen, rect):
     #print("UP", rect.moving_up, "DOWN", rect.moving_down)
 
 
-def update_screen(ai_settings, screen, rect):
+def update_screen(ai_settings, screen, rect, ship):
     """Update game screen."""
     screen.fill(ai_settings.bg_color)
     rect.draw_rect()
+    ship.blitme()
     pygame.display.flip()
