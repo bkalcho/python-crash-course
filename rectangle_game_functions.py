@@ -5,6 +5,8 @@
 import pygame
 import sys
 from rectangle_bullet import Bullet
+from rectangle import Rectangle
+from time import sleep
 
 def check_events(ai_settings, screen, ship, bullets):
     """Check for keyboard presses and mouse events."""
@@ -50,12 +52,26 @@ def fire_bullets(ai_settings, screen, ship, bullets):
         bullets.add(new_bullet)
 
 
-def update_bullets(screen, bullets):
+def check_bullet_rectangle_collisions(ai_settings, screen, rectangle, bullets):
+    """Respond to bullet-rectangle collisions."""
+    if pygame.sprite.spritecollideany(rectangle, bullets):
+        bullets.empty()
+        rectangle.reset_position()
+
+        sleep(1.5)
+
+
+def update_bullets(ai_settings, stats, screen, rectangle, bullets):
     screen_rect = screen.get_rect()
     bullets.update()
     for bullet in bullets.copy():
         if bullet.rect.left >= screen_rect.right:
             bullets.remove(bullet)
+            ai_settings.target_misses -= 1
+        if ai_settings.target_misses == 0:
+            stats.game_active = False
+
+    check_bullet_rectangle_collisions(ai_settings, screen, rectangle, bullets)
 
 
 def rectangle_update(screen, rect):

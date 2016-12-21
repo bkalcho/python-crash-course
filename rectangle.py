@@ -34,3 +34,7 @@ class Rectangle(object):
 
     def draw_rect(self):
         pygame.draw.rect(self.screen, self.color, self.rect)
+    
+    def reset_position(self):
+        """Put rectangle on start position."""
+        self.y = self.screen_rect.top
