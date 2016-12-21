@@ -23,3 +23,4 @@ class Settings(object):
         self.bullet_height = 2
         self.bullet_color = (0, 0, 0)
         self.bullet_speed_factor = 3
+        self.bullet_limit = 3

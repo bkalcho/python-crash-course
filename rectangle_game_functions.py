@@ -45,8 +45,17 @@ def check_rectangle_direction(screen_rect, rect):
 
 def fire_bullets(ai_settings, screen, ship, bullets):
     """Firing bullets in the game."""
-    new_bullet = Bullet(ai_settings, screen, ship)
-    bullets.add(new_bullet)
+    if len(bullets) < ai_settings.bullet_limit:
+        new_bullet = Bullet(ai_settings, screen, ship)
+        bullets.add(new_bullet)
+
+
+def update_bullets(screen, bullets):
+    screen_rect = screen.get_rect()
+    bullets.update()
+    for bullet in bullets.copy():
+        if bullet.rect.left >= screen_rect.right:
+            bullets.remove(bullet)
 
 
 def rectangle_update(screen, rect):

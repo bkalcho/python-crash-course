@@ -32,7 +32,7 @@ def run_game():
         gf.check_events(ai_settings, screen, ship, bullets)
         gf.rectangle_update(screen, rect)
         ship.update()
-        bullets.update()
+        gf.update_bullets(screen, bullets)
         gf.update_screen(ai_settings, screen, rect, ship, bullets)
 
 
