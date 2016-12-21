@@ -12,8 +12,9 @@ class Bullet(Sprite):
         """Initializes bullet class."""
         super(Bullet, self).__init__()
         self.screen = screen
-        self.rect = pygame.Rect(0, 0, ai_settings.bullet_width,
-                ai_settings.bullet_height)
+        self.ai_settings = ai_settings
+        self.rect = pygame.Rect(0, 0, self.ai_settings.bullet_width,
+                self.ai_settings.bullet_height)
         self.ship = ship
         self.ship_rect = self.ship.rect
         
@@ -28,7 +29,8 @@ class Bullet(Sprite):
 
     def update(self):
         """Update bullet position."""
-        pass
+        self.left += self.ai_settings.bullet_speed_factor
+        self.rect.left = self.left
 
     def draw_bullet(self):
         """Draw bullet on the screen."""

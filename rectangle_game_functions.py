@@ -4,26 +4,27 @@
 
 import pygame
 import sys
+from rectangle_bullet import Bullet
 
-def check_events(ship):
+def check_events(ai_settings, screen, ship, bullets):
     """Check for keyboard presses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            check_kedown_events(event, ship)
+            check_keydown_events(ai_settings, event, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
 
 
-def check_kedown_events(event, ship):
+def check_keydown_events(ai_settings, event, screen, ship, bullets):
     """Check for key presses."""
     if event.key == pygame.K_UP:
         ship.movement_up = True
     elif event.key == pygame.K_DOWN:
         ship.movement_down = True
     elif event.key == pygame.K_SPACE:
-        fire_bullets()
+        fire_bullets(ai_settings, screen, ship, bullets)
 
 
 def check_keyup_events(event, ship):
@@ -42,9 +43,10 @@ def check_rectangle_direction(screen_rect, rect):
         rect.moving_up = True
 
 
-def fire_bullets():
+def fire_bullets(ai_settings, screen, ship, bullets):
     """Firing bullets in the game."""
-    pass
+    new_bullet = Bullet(ai_settings, screen, ship)
+    bullets.add(new_bullet)
 
 
 def rectangle_update(screen, rect):
@@ -59,5 +61,6 @@ def update_screen(ai_settings, screen, rect, ship, bullets):
     screen.fill(ai_settings.bg_color)
     rect.draw_rect()
     ship.blitme()
-    bullets.draw(screen)
+    for bullet in bullets.sprites():
+        bullet.draw_bullet()
     pygame.display.flip()

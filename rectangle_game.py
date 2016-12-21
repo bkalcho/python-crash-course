@@ -29,9 +29,10 @@ def run_game():
     while True:
         # Main game loop.
 
-        gf.check_events(ship)
+        gf.check_events(ai_settings, screen, ship, bullets)
         gf.rectangle_update(screen, rect)
         ship.update()
+        bullets.update()
         gf.update_screen(ai_settings, screen, rect, ship, bullets)
 
 
