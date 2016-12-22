@@ -19,15 +19,18 @@ def check_events(ai_settings, stats, screen, rect, play_button, ship, bullets):
             check_keyup_events(event, ship)
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(stats, rect, ship, bullets, play_button, mouse_x,
+            check_play_button(ai_settings, stats, rect, ship, bullets, play_button, mouse_x,
                                 mouse_y)
 
 
-def check_play_button(stats, rect, ship, bullets, play_button, mouse_x,
+def check_play_button(ai_settings, stats, rect, ship, bullets, play_button, mouse_x,
                         mouse_y):
     """Start a new game when player presses button."""
     button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
     if button_clicked and not stats.game_active:
+        # Reset game settings.
+        ai_settings.initialize_dynamic_settings()
+
         # Hide mouse cursor.
         pygame.mouse.set_visible(False)
 
@@ -86,6 +89,9 @@ def check_bullet_rectangle_collisions(ai_settings, screen, rectangle, bullets):
     """Respond to bullet-rectangle collisions."""
     if pygame.sprite.spritecollideany(rectangle, bullets):
         bullets.empty()
+        # Speedup game at the next level.
+        ai_settings.speedup_game()
+        
         rectangle.reset_position()
 
         sleep(1.5)
