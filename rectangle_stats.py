@@ -9,8 +9,8 @@ class GameStats(object):
         """Initializing statistics."""
         self.ai_settings = ai_settings
         self.reset_stats()
-        self.game_active = True # Start game in inactive state.
+        self.game_active = False # Start game in inactive state.
     
     def reset_stats(self):
         """Initialize statistics."""
-        self.target_misses = self.ai_settings.target_misses
+        self.target_misses_left = self.ai_settings.target_misses_limit

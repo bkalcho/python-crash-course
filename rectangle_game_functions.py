@@ -8,7 +8,7 @@ from rectangle_bullet import Bullet
 from rectangle import Rectangle
 from time import sleep
 
-def check_events(ai_settings, screen, ship, bullets):
+def check_events(ai_settings, stats, screen, rect, play_button, ship, bullets):
     """Check for keyboard presses and mouse events."""
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -17,6 +17,35 @@ def check_events(ai_settings, screen, ship, bullets):
             check_keydown_events(ai_settings, event, screen, ship, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, rect, ship, bullets, play_button, mouse_x,
+                                mouse_y)
+
+
+def check_play_button(stats, rect, ship, bullets, play_button, mouse_x,
+                        mouse_y):
+    """Start a new game when player presses button."""
+    button_clicked = play_button.rect.collidepoint(mouse_x, mouse_y)
+    if button_clicked and not stats.game_active:
+        # Hide mouse cursor.
+        pygame.mouse.set_visible(False)
+
+        start_game(stats, rect, ship, bullets)
+
+
+def start_game(stats, rect, ship, bullets):
+    """Start new game."""
+    # Reset Game statistics.
+    stats.reset_stats()
+    stats.game_active = True
+
+    # Destroy all bullets.
+    bullets.empty()
+
+    # Center the ship, and reset rectangle position.
+    ship.center_ship()
+    rect.reset_position()
 
 
 def check_keydown_events(ai_settings, event, screen, ship, bullets):
@@ -35,6 +64,7 @@ def check_keyup_events(event, ship):
         ship.movement_up = False
     elif event.key == pygame.K_DOWN:
         ship.movement_down = False
+
 
 def check_rectangle_direction(screen_rect, rect):
     if rect.rect.top <= screen_rect.top:
@@ -67,9 +97,10 @@ def update_bullets(ai_settings, stats, screen, rectangle, bullets):
     for bullet in bullets.copy():
         if bullet.rect.left >= screen_rect.right:
             bullets.remove(bullet)
-            ai_settings.target_misses -= 1
-        if ai_settings.target_misses == 0:
+            stats.target_misses_left -= 1
+        if stats.target_misses_left == 0:
             stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     check_bullet_rectangle_collisions(ai_settings, screen, rectangle, bullets)
 
@@ -81,11 +112,15 @@ def rectangle_update(screen, rect):
     rect.update()
 
 
-def update_screen(ai_settings, screen, rect, ship, bullets):
+def update_screen(ai_settings, stats, screen, rect, ship, bullets, play_button):
     """Update game screen."""
     screen.fill(ai_settings.bg_color)
     rect.draw_rect()
     ship.blitme()
     for bullet in bullets.sprites():
         bullet.draw_bullet()
+
+    if not stats.game_active:
+        play_button.draw_button()
+
     pygame.display.flip()

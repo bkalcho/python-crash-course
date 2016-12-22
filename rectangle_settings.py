@@ -24,4 +24,4 @@ class Settings(object):
         self.bullet_color = (0, 0, 0)
         self.bullet_speed_factor = 3
         self.bullet_limit = 3
-        self.target_misses = 3
+        self.target_misses_limit = 3
