@@ -1,14 +1,14 @@
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
+app_name = 'pizzas'
+
 urlpatterns = [
-    # Home page
-    url(r'^$', views.index, name='index'),
-
-    # Show all pizzas.
-    url(r'^pizza_list/$', views.pizza_list, name='pizza_list'),
-
-    # Toppings for each pizza
-    url(r'^pizza_list/(?P<pizza_id>\d+)/$', views.pizza, name='pizza')
+    #Home page.
+    path('', views.index, name='index'),
+    #show all pizzas.
+    path('pizza_list/', views.pizza_list, name='pizza_list'),
+    # toppings for each pizza
+    path('pizza_list/<int:pizza_id>/', views.pizza, name='pizza'),
 ]
